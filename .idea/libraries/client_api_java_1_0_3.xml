@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="client-api-java-1.0-3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/artifacts-24/filestore/com.marklogic/client-api-java/1.0-3/jar/5e1befd5bc168351c4a89c2d1aa8035c4f622a63/client-api-java-1.0-3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/artifacts-24/filestore/com.marklogic/client-api-java/1.0-3/source/fa526eba45ce11a0250e5e88973d47e39cb70610/client-api-java-1.0-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
