@@ -1,9 +1,19 @@
 package com.example.dataaccess
 
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 import org.junit.Before
 import org.junit.Test
+import org.w3c.dom.Document
+
+import javax.xml.xpath.XPath
+import javax.xml.xpath.XPathConstants
+import javax.xml.xpath.XPathExpression
+import javax.xml.xpath.XPathFactory
 
 class MarkLogicClientIntegrationTest {
+    private static Log LOG = LogFactory.getLog(MarkLogicClientIntegrationTest)
+
     MarkLogicClient markLogicClient
 
     @Before
@@ -31,6 +41,20 @@ class MarkLogicClientIntegrationTest {
 
     @Test
     void shouldGetJsonDocument() {
-        markLogicClient.getJsonString('/json/two.json')
+        final Document checklist = markLogicClient.getXmlDocument('/checklist/f2284957-8809-4de7-9424-ee1f0cc4852c.xml')
+        XPathFactory factory = XPathFactory.newInstance();
+        XPath xpath = factory.newXPath();
+        XPathExpression xPathExpression = xpath.compile("//scopedIntervention/id");
+
+        org.w3c.dom.NodeList scopedInterventionIdNodes = xPathExpression.evaluate(checklist, XPathConstants.NODESET) as org.w3c.dom.NodeList
+        List<String> scopedInterventionIds = scopedInterventionIdNodes.collect {
+            final String scopedInterventionId = it.textContent
+            if (LOG.debugEnabled) {
+                LOG.debug("Found scoped intervention ID: ${scopedInterventionId}")
+            }
+            scopedInterventionId
+        }
+
+        assert scopedInterventionIds.size()
     }
 }
